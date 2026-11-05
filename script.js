@@ -1,7 +1,6 @@
 (function () {
   'use strict';
 
-  // WhatsApp: 55 + DDD + número. Confira antes de publicar.
   var WHATS = '5511961760203';
   var d = document;
   var h = d.documentElement;
@@ -17,7 +16,6 @@
   var reduce = window.matchMedia &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Desenha a marca SVG.
   var logoMarkup = '<rect class="d" style="--i:0" pathLength="1" x="0" y="0" width="100" height="100"/>' +
     '<line class="d" style="--i:1" pathLength="1" x1="22.4" y1="0" x2="22.4" y2="100"/>' +
     '<line class="d" style="--i:1" pathLength="1" x1="67.2" y1="0" x2="67.2" y2="100"/>' +
@@ -33,13 +31,51 @@
 
   h.classList.add('ready');
 
-  // Abertura: também funciona se o elemento não existir.
+  var slides = $$('.hero-img .slide');
+  var dots = $$('.dots button');
+  var slideIndex = -1;
+  var slideTimer = null;
+
+  function go(index) {
+    if (!slides.length) return;
+    index = (index + slides.length) % slides.length;
+    if (index === slideIndex) return;
+
+    slides.forEach(function (slide) {
+      slide.classList.remove('prev', 'first');
+    });
+
+    if (slideIndex >= 0 && slides[slideIndex]) {
+      slides[slideIndex].classList.remove('on');
+      slides[slideIndex].classList.add('prev');
+    } else {
+      slides[index].classList.add('first');
+    }
+
+    slides[index].classList.add('on');
+
+    dots.forEach(function (dot, i) {
+      dot.classList.toggle('on', i === index);
+    });
+
+    slideIndex = index;
+    window.clearTimeout(slideTimer);
+
+    if (!reduce && slides.length > 1) {
+      slideTimer = window.setTimeout(function () {
+        go((slideIndex + 1) % slides.length);
+      }, 5500);
+    }
+  }
+
+  // Abertura.
   var intro = $('#intro');
   var done = false;
 
   function start() {
     h.classList.add('go');
     if (slides.length) go(0);
+
     $$('.hero .clip').forEach(function (element) {
       element.classList.add('in');
     });
@@ -68,7 +104,7 @@
     start();
   }
 
-  // Revelação ao rolar. As imagens não ficam escondidas se o observer falhar.
+  // Revelação ao rolar.
   if ('IntersectionObserver' in window && !reduce) {
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
@@ -77,7 +113,10 @@
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -6% 0px'
+    });
 
     $$('.rv, .fade, .clip').filter(function (element) {
       return !element.closest('.hero');
@@ -92,34 +131,41 @@
   }
 
   // Paralaxe e cabeçalho.
-  var px = $$('[data-px]');
+  var px = reduce ? [] : $$('[data-px]');
   var header = $('#top');
   var lastScroll = 0;
   var ticking = false;
 
   function parallax() {
     var vh = window.innerHeight;
+
     px.forEach(function (img) {
       var parent = img.parentNode;
       var rect = parent.getBoundingClientRect();
       var center = (rect.top + rect.height / 2 - vh / 2) / vh;
       center = Math.max(-1, Math.min(1, center));
-      img.style.translate = '0 ' + (-center * rect.height * 0.035).toFixed(1) + 'px';
+      img.style.translate = '0 ' + (-center * rect.height * 0.025).toFixed(1) + 'px';
     });
   }
 
   function headerScroll() {
     var y = window.scrollY || window.pageYOffset;
+
     if (header && !h.classList.contains('open')) {
-      if (y > lastScroll + 6 && y > 240) header.classList.add('hide');
-      else if (y < lastScroll - 6 || y < 120) header.classList.remove('hide');
+      if (y > lastScroll + 6 && y > 240) {
+        header.classList.add('hide');
+      } else if (y < lastScroll - 6 || y < 120) {
+        header.classList.remove('hide');
+      }
     }
+
     lastScroll = y;
   }
 
   window.addEventListener('scroll', function () {
     if (ticking) return;
     ticking = true;
+
     window.requestAnimationFrame(function () {
       ticking = false;
       if (!reduce) parallax();
@@ -129,16 +175,18 @@
 
   if (!reduce) parallax();
 
-  // Menu em tela cheia.
+  // Menu.
   var button = $('#menuBtn');
   var menu = $('#menu');
 
   function setMenu(open) {
     h.classList.toggle('open', open);
+
     if (button) {
       button.setAttribute('aria-expanded', String(open));
       button.textContent = open ? 'Fechar' : 'Menu';
     }
+
     if (menu) menu.setAttribute('aria-hidden', String(!open));
     if (header) header.classList.remove('hide');
   }
@@ -160,47 +208,14 @@
     trigger.addEventListener('click', function () {
       var row = trigger.closest('.row');
       if (!row) return;
+
       var open = !row.classList.contains('open');
       row.classList.toggle('open', open);
       trigger.setAttribute('aria-expanded', String(open));
     });
   });
 
-  // Carrossel principal.
-  var slides = $$('.hero-img .slide');
-  var dots = $$('.dots button');
-  var slideIndex = -1;
-  var slideTimer = null;
-
-  function go(index) {
-    if (!slides.length) return;
-    index = (index + slides.length) % slides.length;
-    if (index === slideIndex) return;
-
-    slides.forEach(function (slide) {
-      slide.classList.remove('prev');
-    });
-
-    if (slideIndex >= 0 && slides[slideIndex]) {
-      slides[slideIndex].classList.remove('on');
-      slides[slideIndex].classList.add('prev');
-    }
-
-    slides[index].classList.add('on');
-    dots.forEach(function (dot, i) {
-      dot.classList.toggle('on', i === index);
-    });
-
-    slideIndex = index;
-    window.clearTimeout(slideTimer);
-
-    if (!reduce && slides.length > 1) {
-      slideTimer = window.setTimeout(function () {
-        go((slideIndex + 1) % slides.length);
-      }, 5500);
-    }
-  }
-
+  // Pontos do carrossel.
   dots.forEach(function (dot, index) {
     dot.addEventListener('click', function () {
       go(index);
@@ -226,30 +241,39 @@
 
   var lightboxImage = $('img', lightbox);
   var lightboxCaption = $('p', lightbox);
+  var previousOverflow = '';
 
   function showImage(index) {
     if (!tiles.length) return;
+
     current = (index + tiles.length) % tiles.length;
+
     var tile = tiles[current];
     var image = $('img', tile);
     if (!image) return;
 
     lightboxImage.src = image.currentSrc || image.src;
     lightboxImage.alt = image.alt;
-    lightboxCaption.textContent = tile.getAttribute('data-cap') || image.alt;
+    lightboxCaption.textContent =
+      tile.getAttribute('data-cap') || image.alt;
+  }
+
+  function openLightbox(index) {
+    showImage(index);
+    previousOverflow = d.body.style.overflow;
+    lightbox.classList.add('on');
+    d.body.style.overflow = 'hidden';
+    $('.x', lightbox).focus();
   }
 
   function closeLightbox() {
     lightbox.classList.remove('on');
-    d.body.style.overflow = '';
+    d.body.style.overflow = previousOverflow;
   }
 
   tiles.forEach(function (tile, index) {
     tile.addEventListener('click', function () {
-      showImage(index);
-      lightbox.classList.add('on');
-      d.body.style.overflow = 'hidden';
-      $('.x', lightbox).focus();
+      openLightbox(index);
     });
   });
 
@@ -268,45 +292,55 @@
   });
 
   var touchX = 0;
+
   lightbox.addEventListener('touchstart', function (event) {
     touchX = event.touches[0].clientX;
   }, { passive: true });
 
   lightbox.addEventListener('touchend', function (event) {
     var delta = event.changedTouches[0].clientX - touchX;
-    if (Math.abs(delta) > 50) showImage(current + (delta < 0 ? 1 : -1));
-  });
+    if (Math.abs(delta) > 50) {
+      showImage(current + (delta < 0 ? 1 : -1));
+    }
+  }, { passive: true });
 
   d.addEventListener('keydown', function (event) {
     if (event.key === 'Escape') {
       closeLightbox();
       if (h.classList.contains('open')) setMenu(false);
     }
+
     if (lightbox.classList.contains('on')) {
       if (event.key === 'ArrowRight') showImage(current + 1);
       if (event.key === 'ArrowLeft') showImage(current - 1);
     }
   });
 
-  // Formulário: abre conversa no WhatsApp.
+  // Formulário para WhatsApp.
   var form = $('#form');
+
   if (form) {
     form.addEventListener('submit', function (event) {
       event.preventDefault();
+
       var name = form.elements.nome.value.trim();
       var message = form.elements.msg.value.trim();
+
       if (!name || !message) return;
 
       var text = 'Olá! Meu nome é ' + name + '. ' + message;
       var url = 'https://wa.me/' + WHATS + '?text=' + encodeURIComponent(text);
+
       window.open(url, '_blank', 'noopener,noreferrer');
     });
   }
 
-  // Diagnóstico útil: nomes/caminhos de imagens quebrados aparecem no console.
+  // Diagnóstico de imagens.
   $$('img').forEach(function (img) {
     img.addEventListener('error', function () {
-      console.error('Não foi possível carregar a imagem: ' + img.getAttribute('src'));
+      console.error(
+        'Não foi possível carregar a imagem: ' + img.getAttribute('src')
+      );
     });
   });
 })();
