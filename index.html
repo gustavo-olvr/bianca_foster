@@ -1,0 +1,361 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+  <title>Biessência Arquitetura &amp; Interiores</title>
+
+  <meta name="description" content="Biessência: móveis sob medida, interiores e projeto 3D.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+  <!-- INTRO -->
+  <div id="intro" role="presentation" title="Toque para pular">
+    <svg class="logo" viewBox="-3 -3 106 106" aria-label="Biessência"></svg>
+  </div>
+
+  <!-- HEADER -->
+  <header id="top">
+    <a class="mark" href="#inicio" aria-label="Início">
+      <svg class="logo st" viewBox="-3 -3 106 106" aria-hidden="true"></svg>
+    </a>
+
+    <button id="menuBtn" aria-expanded="false" aria-controls="menu">
+      Menu
+    </button>
+  </header>
+
+  <!-- MENU -->
+  <div id="menu" aria-hidden="true">
+    <nav>
+      <a href="#inicio" style="--n:0"><span>Início</span></a>
+      <a href="#sobre" style="--n:1"><span>Sobre</span></a>
+      <a href="#servicos" style="--n:2"><span>Serviços</span></a>
+      <a href="#projetos" style="--n:3"><span>Projetos</span></a>
+      <a href="#contato" style="--n:4"><span>Contato</span></a>
+    </nav>
+
+    <p>@studiobiessencia</p>
+  </div>
+
+  <main>
+
+    <!-- INÍCIO -->
+    <section id="inicio" class="hero">
+
+      <div class="hero-txt">
+        <h1>
+          <span class="ln">
+            <span style="--n:0">A essência</span>
+          </span>
+
+          <span class="ln">
+            <span style="--n:1">de quem você é,</span>
+          </span>
+
+          <span class="ln">
+            <span style="--n:2">em forma de casa.</span>
+          </span>
+        </h1>
+
+        <p class="sub fade">
+          Móveis sob medida e interiores, projetados a partir da sua planta e da sua rotina.
+        </p>
+
+        <a class="btn fade" href="#projetos">
+          Ver projetos
+        </a>
+      </div>
+
+      <div class="hero-img clip">
+        <img
+          src="./assets/quarto-infantil (2).jpg"
+          alt="Quarto infantil com cama casinha de madeira e papel de parede floral"
+          fetchpriority="high"
+          decoding="async"
+        >
+      </div>
+
+    </section>
+
+    <!-- SOBRE -->
+    <section id="sobre" class="about-s">
+
+      <div class="wrap about">
+
+        <div class="portrait clip">
+          <img
+            src="./assets/bianca.jpg"
+            alt="Retrato da projetista da Biessência"
+            loading="lazy"
+            decoding="async"
+          >
+        </div>
+
+        <div class="about-t">
+
+          <h2 class="lead rv">
+            <span class="ln">
+              <span>
+                Projetista de móveis sob medida e estudante de arquitetura e urbanismo.
+              </span>
+            </span>
+          </h2>
+
+          <p class="fade">
+            Gosto de transformar medidas apertadas em ambientes que funcionam de verdade. Cada projeto começa pela planta e pela rotina de quem vai morar ali: o que precisa ser guardado, o que merece ficar à mostra e como a luz entra durante o dia.
+          </p>
+
+          <p class="fade">
+            Ao mesmo tempo, estudo arquitetura e urbanismo, e isso aparece no meu jeito de projetar, com atenção aos materiais, às proporções e à história dos espaços.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- SERVIÇOS -->
+    <section id="servicos" class="svc-s">
+
+      <div class="wrap svc">
+
+        <div class="svc-h">
+          <h2 class="rv">
+            <span class="ln">
+              <span>Serviços</span>
+            </span>
+          </h2>
+
+          <p class="fade">
+            Do primeiro desenho até a instalação, em cada ambiente da casa.
+          </p>
+        </div>
+
+        <div class="rows">
+
+          <article class="row open">
+            <h3 class="row-t">
+              <button class="row-h" aria-expanded="true">
+                Móveis sob medida
+                <span class="pm"></span>
+              </button>
+            </h3>
+
+            <div class="row-b">
+              <div>
+                <p>
+                  Cozinhas, banheiros, quartos e áreas de serviço desenhados para a medida exata do seu espaço, com atenção à rotina de quem vai usar.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="row">
+            <h3 class="row-t">
+              <button class="row-h" aria-expanded="false">
+                Projeto de interiores
+                <span class="pm"></span>
+              </button>
+            </h3>
+
+            <div class="row-b">
+              <div>
+                <p>
+                  Layout, iluminação, materiais e acabamentos pensados em conjunto, para o ambiente ficar bonito e funcionar no dia a dia.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="row">
+            <h3 class="row-t">
+              <button class="row-h" aria-expanded="false">
+                Projeto 3D
+                <span class="pm"></span>
+              </button>
+            </h3>
+
+            <div class="row-b">
+              <div>
+                <p>
+                  Você vê o ambiente em render antes de qualquer corte de madeira e ajusta o que precisar com segurança.
+                </p>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- PROJETOS -->
+    <section id="projetos" class="proj-s">
+
+      <div class="wrap">
+
+        <div class="proj-h">
+          <h2 class="rv">
+            <span class="ln">
+              <span>Projetos</span>
+            </span>
+          </h2>
+
+          <p class="fade">
+            Alguns ambientes que projetei.
+          </p>
+        </div>
+
+        <div class="mosaic">
+
+          <figure class="f1">
+
+            <button class="tile clip" data-cap="Cozinha">
+              <img
+                src="./assets/cozinha.jpg"
+                alt="Cozinha linear com armários cinza e vidro fumê"
+                loading="lazy"
+                decoding="async"
+              >
+            </button>
+
+            <figcaption class="fade">
+              <b>Cozinha.</b> Ambientes integrados em tons neutros, marcenaria sóbria e iluminação acolhedora, pensados para o dia a dia com elegância.
+            </figcaption>
+
+          </figure>
+
+          <figure class="f2">
+
+            <button class="tile clip" data-cap="Lavabo">
+              <img
+                src="./assets/banheiro (2).jpg"
+                alt="Lavabo com gabinete cinza e armário com espelho"
+                loading="lazy"
+                decoding="async"
+              >
+            </button>
+
+            <figcaption class="fade">
+              <b>Lavabo.</b> Gabinete e armário com espelho, com bancada clara.
+            </figcaption>
+
+          </figure>
+
+          <figure class="f3">
+
+            <button class="tile clip" data-cap="Quarto infantil">
+              <img
+                src="./assets/quarto-infantil (2).jpg"
+                alt="Quarto infantil com cama casinha de madeira"
+                loading="lazy"
+                decoding="async"
+              >
+            </button>
+
+            <figcaption class="fade">
+              <b>Quarto infantil.</b> Cama casinha em madeira clara, cômoda e prateleira.
+            </figcaption>
+
+          </figure>
+
+          <a
+            class="more fade"
+            href="https://instagram.com/studiobiessencia"
+            target="_blank"
+            rel="noopener"
+          >
+            Ver mais projetos no Instagram
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- CONTATO -->
+    <section id="contato" class="contact">
+
+      <div class="wrap cgrid">
+
+        <div>
+
+          <h2 class="rv">
+            <span class="ln">
+              <span>Vamos conversar sobre o seu projeto?</span>
+            </span>
+          </h2>
+
+          <p class="fade">
+            Me conta o que você precisa e a gente começa pelas medidas.
+          </p>
+
+          <p class="info fade">
+            +55 (11) 9000000
+            <br>
+
+            <a
+              href="https://instagram.com/studiobiessencia"
+              target="_blank"
+              rel="noopener"
+            >
+              @studiobiessencia
+            </a>
+          </p>
+
+        </div>
+
+        <form id="form" class="fade">
+
+          <input
+            name="nome"
+            aria-label="Seu nome"
+            placeholder="Seu nome"
+            required
+            autocomplete="name"
+          >
+
+          <textarea
+            name="msg"
+            aria-label="Mensagem"
+            placeholder="Conte um pouco sobre o ambiente"
+            rows="3"
+            required
+          ></textarea>
+
+          <button class="btn" type="submit">
+            Enviar pelo WhatsApp
+          </button>
+
+        </form>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    Biessência Arquitetura &amp; Interiores, @studiobiessencia
+  </footer>
+
+  <!-- JAVASCRIPT -->
+  <script src="./script.js" defer></script>
+
+</body>
+</html>
